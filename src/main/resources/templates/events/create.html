@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<body>
+<body class="container">
 
 <header th:replace="fragments :: header"></header>
 
+<p th:text="${errorMsg}" style="color:red;"></p>
 <form method="post" action="/events/create">
-    <label for="eventName" >Give event a name</label>
-    <input type="text" name="eventName">
-    <label for="description" >Give event a description</label>
-    <input type="text" name="description">
-    <input type="submit" value="Create">
+    <div class="form-group">
+        <label>Give event a name
+    <!--  name="" needs to match field names of Event class-->
+            <input th:field="${event.name}" class="form-control">
+        </label>
+        <p style="color:red" th:errors="${event.name}"></p>
+    </div>
+    <div class="form-group">
+        <label>Give event a description
+            <input th:field="${event.description}" class="form-control">
+        </label>
+        <p style="color:red" th:errors="${event.description}"></p>
+    </div>
+    <div class="form-group">
+        <label >Email
+            <input th:field="${event.contactEmail}" class="form-control">
+        </label>
+        <p style="color:red" th:errors="${event.contactEmail}"></p>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-success">
+    </div>
 </form>
 
 </body>
