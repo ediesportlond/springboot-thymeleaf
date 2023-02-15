@@ -8,6 +8,16 @@
 <p th:text="${errorMsg}" style="color:red;"></p>
 <form method="post" action="/events/create">
     <div class="form-group">
+        <label> Type
+            <select th:field="${event.type}">
+                <option th:each="type : ${types}"
+                        th:value="${type}"
+                        th:text="${type.displayName}"
+                ></option>
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
         <label>Give event a name
     <!--  name="" needs to match field names of Event class-->
             <input th:field="${event.name}" class="form-control">
