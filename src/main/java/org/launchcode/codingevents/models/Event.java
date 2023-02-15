@@ -1,21 +1,25 @@
 package org.launchcode.codingevents.models;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
-
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Event {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
 
     @NotBlank
-    @Length(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
 
-    @Length(max = 500, message = "Description too long!")
+    @Size(max = 500, message = "Description too long!")
     private String description;
 
     @NotBlank
@@ -24,12 +28,8 @@ public class Event {
 
     private EventType type;
 
-    public Event(){
-        this.id = nextId;
-        nextId++;
-    }
+    public Event(){}
     public Event(String name, String description, String contactEmail, EventType type) {
-        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
